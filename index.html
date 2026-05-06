@@ -68,7 +68,6 @@
         .jom-sertai:active { transform: translateY(4px); box-shadow: 0 0 0 #d97706; }
         .jom-sertai::before { content: '❤️'; font-size: 0.8rem; }
 
-        /* Susunan Hero Section Baru (Kiri Poster, Kanan Borang) */
         .hero-section {
             display: grid;
             grid-template-columns: 1.2fr 1fr; 
@@ -122,6 +121,7 @@
         }
         .input-group:focus-within { border-color: var(--primary); background-color: white; }
         .input-icon { color: #94a3b8; font-size: 1.1rem; width: 25px; }
+        
         input {
             flex-grow: 1;
             border: none;
@@ -129,6 +129,10 @@
             padding: 10px 5px;
             font-size: 0.95rem;
             color: var(--text-dark);
+            text-transform: uppercase; /* INI AKAN BUAT HURUF BESAR MASA TAIP */
+        }
+        input::placeholder {
+            text-transform: none; /* Biar placeholder kekal huruf kecil/biasa */
         }
         input:focus { outline: none; }
         
@@ -281,7 +285,7 @@
                     <label for="noTel">No. Telefon <span class="required">*</span></label>
                     <div class="input-group">
                         <span class="input-icon">📞</span>
-                        <input type="tel" id="noTel" placeholder="Contoh: 012-3456789" required>
+                        <input type="text" id="noTel" placeholder="Contoh: 012-3456789" required>
                     </div>
                 </div>
                 <button type="submit" id="submitBtn"><span>⚽</span> Hantar Pendaftaran</button>
@@ -373,10 +377,11 @@
         btn.disabled = true;
         btn.innerHTML = '<span>⏳</span> Menghantar...';
 
+        // INI PENTING: .toUpperCase() akan paksa data jadi huruf besar sebelum hantar ke Sheet
         const formData = {
-            sekolah: document.getElementById('sekolah').value,
-            pic: document.getElementById('pic').value,
-            noTel: document.getElementById('noTel').value
+            sekolah: document.getElementById('sekolah').value.toUpperCase(),
+            pic: document.getElementById('pic').value.toUpperCase(),
+            noTel: document.getElementById('noTel').value.toUpperCase()
         };
 
         try {
