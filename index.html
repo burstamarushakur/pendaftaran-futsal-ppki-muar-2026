@@ -129,10 +129,10 @@
             padding: 10px 5px;
             font-size: 0.95rem;
             color: var(--text-dark);
-            text-transform: uppercase; /* INI AKAN BUAT HURUF BESAR MASA TAIP */
+            text-transform: uppercase; 
         }
         input::placeholder {
-            text-transform: none; /* Biar placeholder kekal huruf kecil/biasa */
+            text-transform: none; 
         }
         input:focus { outline: none; }
         
@@ -217,26 +217,38 @@
             box-shadow: 0 2px 4px rgba(0,0,0,0.05);
         }
         
+        /* CSS FOOTER BARU (FLEX & CENTER) */
         .footer-section {
             border-top: 2px dashed #cbd5e1;
             margin-top: 50px;
             padding-top: 25px;
             padding-bottom: 25px;
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 20px;
-            color: #6d28d9;
-            font-size: 0.85rem;
-            font-weight: bold;
+            display: flex; /* Ganti grid ke flex */
+            flex-direction: column; /* Stack vertically */
+            align-items: center; /* Center horizontally */
+            gap: 15px;
             text-align: center;
         }
-        .footer-item { display: flex; flex-direction: column; align-items: center; gap: 8px; }
-        .footer-icon { font-size: 1.5rem; background: white; padding: 10px; border-radius: 50%; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
+        
+        .footer-image {
+            max-width: 100%; /* Responsive width */
+            height: auto;
+            max-height: 150px; /* Hadkan tinggi supaya tak terlalu besar */
+            background: transparent; /* Pastikan background transparent */
+        }
+
+        .footer-text-credits {
+            color: #64748b; /* Warna kelabu muted sikit */
+            font-size: 0.8rem;
+            font-weight: bold;
+            line-height: 1.6;
+            margin-top: 5px;
+        }
 
         @media (max-width: 900px) {
             .hero-section { grid-template-columns: 1fr; }
             .info-cards-container { grid-template-columns: 1fr 1fr; }
-            .footer-section { grid-template-columns: 1fr 1fr; }
+            /* Padam responsive grid footer lama */
         }
         @media (max-width: 600px) {
             .info-cards-container { grid-template-columns: 1fr; }
@@ -343,15 +355,16 @@
     </div>
 
     <footer class="footer-section">
-        <div class="footer-item"><span class="footer-icon">🛡️</span>Sukan Untuk Semua</div>
-        <div class="footer-item"><span class="footer-icon">🤝</span>Inklusif & Mesra</div>
-        <div class="footer-item"><span class="footer-icon">⭐</span>Disiplin & Fair Play</div>
-        <div class="footer-item"><span class="footer-icon">❤️</span>Kenangan Terindah</div>
+        <img src="https://i.postimg.cc/Hnr1hwdL/Untitled-design.png" alt="Footer Decorative" class="footer-image">
+
+        <div class="footer-text-credits">
+            @HAK MILIK SEK KEB SG ABONG<br>
+            MODERATOR:BURST SHAKUR @ ACAP GARANG
+        </div>
     </footer>
 </div>
 
 <script>
-    // URL WEB APP 
     const scriptURL = 'https://script.google.com/macros/s/AKfycbzS76kGJsst-aIa_DcOa-IxV2nFiriGH34y5WHQSTy8DAwNiD8mPxrhfx4T9uKJ3SpN/exec';
 
     async function fetchSchools() {
@@ -377,7 +390,6 @@
         btn.disabled = true;
         btn.innerHTML = '<span>⏳</span> Menghantar...';
 
-        // INI PENTING: .toUpperCase() akan paksa data jadi huruf besar sebelum hantar ke Sheet
         const formData = {
             sekolah: document.getElementById('sekolah').value.toUpperCase(),
             pic: document.getElementById('pic').value.toUpperCase(),
